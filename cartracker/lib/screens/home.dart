@@ -1,3 +1,4 @@
+import 'package:cartracker/car_manager.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cartracker/widget/car_maintenance_form.dart';
@@ -33,7 +34,13 @@ class HomePage extends StatelessWidget {
               child: Column (
                 children: [
                   const Expanded(child: Center(child: Text("Box 1")),),
-                  CarMaintenanceForm()
+                  CarMaintenanceForm(),
+                  ElevatedButton(
+                    child: Text('Save to JSON'),
+                    onPressed: () {
+                      CarManager().SaveToJson();
+                    },
+                  )
                 ],
                 )
               )

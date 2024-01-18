@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:cartracker/car_manager.dart';
+import 'package:cartracker/views/car.dart';
+
 class CarMaintenanceForm extends StatefulWidget{
   @override
   State<CarMaintenanceForm> createState() => _CarMaintenanceFormState();
@@ -10,8 +13,7 @@ class _CarMaintenanceFormState extends State<CarMaintenanceForm> {
   final formKey = GlobalKey<FormState>();
   final TextEditingController textEditingController = TextEditingController();
 
-  String? make, model;
-  int? year;
+  String? make, model, year;
 
   Widget _buildMake() {
     return TextFormField(
@@ -54,36 +56,47 @@ class _CarMaintenanceFormState extends State<CarMaintenanceForm> {
         return null;
       },
       onSaved: (value) {
-
+        year = value;
       },
     );
   }
 
+  void createCar() {
+    Car car = Car();
+    car.make = make;
+    car.model = model;
+    car.year = year;
+
+    CarManager().addCar(car);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Form(
       key: formKey,
       child: Padding(
-        padding: const EdgeInsets.all(100.0),
-        child: Column (
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            _buildMake(),
-            _buildModel(),
-            _buildYear(),
-            SizedBox(height: 100),
-            ElevatedButton(child: Text("Submit"),
-              onPressed: () => {
-                if (formKey.currentState!.validate()) {
-                  formKey.currentState!.save(),
-                  setState(() => {})
-                }
-              },
+        padding: const EdgeInsets.all(50.0),
+        child: SingleChildScrollView(
+          child: Column (
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              _buildMake(),
+              _buildModel(),
+              _buildYear(),
+              SizedBox(height: 100),
+              ElevatedButton(child: Text("Submit"),
+                onPressed: () => {
+                  if (formKey.currentState!.validate()) {
+                    formKey.currentState!.save(),
+                    createCar(),
+                    setState(() => {}),
+                  }
+                },
+              ),
+              Text('$make $model $year')
+            ],
             ),
-            Text('$make')
-          ],
-          ),
+        ),
       )
     );
   }

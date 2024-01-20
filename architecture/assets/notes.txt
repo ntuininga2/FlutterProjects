@@ -1,0 +1,34 @@
+--------Clean Architecture---------
+
+Three Layers
+1. Presentation Layer
+2. Domain Layer
+3. Data Layer
+
+Presentation Layer
+    -Presents app content (pages, widgets, etc.)
+    -Triggers events that modifies application state
+
+    Parts of Layer
+    1. Pages
+    2. State Management
+    3. Widgets
+
+Domain Layer
+    -Written only in Dart, no flutter
+    -only used for BLL
+    -Must be independent from any other layer
+
+    Parts of Layer
+    1. Entities
+    2. Repo Interfaces
+    3. Use cases
+
+Data Layer
+    -Used for data retrival
+    -handles API calls or calls to local DB
+
+    Parts of Layer
+    1. Repositories
+    2. Data Sources
+    3. Models 

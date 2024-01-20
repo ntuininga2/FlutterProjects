@@ -1,0 +1,3 @@
+This folder contains the implementation of repositories, 
+which act as a single source of truth for the data. 
+Repositories provide an abstraction over the data sources and handle data retrieval and storage.

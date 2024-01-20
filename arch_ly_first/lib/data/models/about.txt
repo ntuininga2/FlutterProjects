@@ -1,0 +1,1 @@
+This folder contains the implementation of data models, which are used to represent the data entities of the application.

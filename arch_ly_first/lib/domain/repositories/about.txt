@@ -1,0 +1,1 @@
+we need interface definition for our repository and that is all we need, the rest will be done on the data layer.

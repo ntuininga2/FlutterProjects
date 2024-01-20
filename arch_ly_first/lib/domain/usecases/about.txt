@@ -1,0 +1,3 @@
+This folder contains the implementation of use cases, 
+which define the business logic of the application. 
+Use cases depend on the domain entities and the repository interfaces.

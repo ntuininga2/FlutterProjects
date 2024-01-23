@@ -15,8 +15,8 @@ class CarManager {
     //Load all cars from json
   }
   
-  void SaveToJson() {
-    
+  void saveToJson() {
+
   }
 
   void addCar(Car car) {

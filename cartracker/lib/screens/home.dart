@@ -1,6 +1,7 @@
 import 'package:cartracker/car_manager.dart';
 import 'package:flutter/material.dart';
 
+import 'package:cartracker/data/datasources/car_api_service.dart';
 import 'package:cartracker/widget/car_maintenance_form.dart';
 
 
@@ -38,7 +39,8 @@ class HomePage extends StatelessWidget {
                   ElevatedButton(
                     child: Text('Save to JSON'),
                     onPressed: () {
-                      CarManager().SaveToJson();
+                      CarManager().saveToJson();
+                      getHttp();
                     },
                   )
                 ],

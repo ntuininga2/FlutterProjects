@@ -1,10 +1,11 @@
-
+import 'dart:async';
 import 'package:geolocation/repositories/base_geolocation_repository.dart';
 import 'package:geolocator/geolocator.dart';
 
 class GeolocationRepository extends BaseGeolocationRepository {
   GeolocationRepository();
 
+  //Get current location as a Future Position Object
   @override
   Future<Position> getCurrentLocation() async {
     bool serviceEnabled;
@@ -43,4 +44,15 @@ class GeolocationRepository extends BaseGeolocationRepository {
     return await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     //return await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
   }
+
+
+  StreamSubscription<Position> positionStream = Geolocator.getPositionStream(locationSettings: const LocationSettings(
+    accuracy: LocationAccuracy.high,
+    distanceFilter: 100,
+    timeLimit: Duration(seconds: 5)
+  )).listen(
+    (Position? position) {
+        print(position == null ? 'Unknown' : '${position.latitude.toString()}, ${position.longitude.toString()}');
+    });
+
 }

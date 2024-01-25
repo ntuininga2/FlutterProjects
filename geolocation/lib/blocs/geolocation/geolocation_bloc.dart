@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:geolocation/repositories/geolocation_repository.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:meta/meta.dart';
+//import 'package:meta/meta.dart';
 
 part 'geolocation_event.dart';
 part 'geolocation_state.dart';

@@ -19,7 +19,7 @@ class MainApp extends StatefulWidget {
 
 class _MainAppState extends State<MainApp> {
   //late Position _position;
-  //String? _address = "";
+  String? _address = "";
 
   // Future<Position> _determinePosition() async {
   //   bool serviceEnabled;
@@ -58,26 +58,26 @@ class _MainAppState extends State<MainApp> {
   //   return await Geolocator.getCurrentPosition();
   // }
 
-  // _getAddressFromCoords() async {
-  //   try{
-  //     Position position = await _determinePosition();
-  //     List<Placemark> newPlace = await GeocodingPlatform.instance.placemarkFromCoordinates(position.latitude, position.longitude);
+  _getAddressFromCoords(Position position) async {
+    try{
+      List<Placemark> newPlace = await GeocodingPlatform.instance.placemarkFromCoordinates(position.latitude, position.longitude);
 
-  //     Placemark place = newPlace[0];
-  //     String? name = place.name;
-  //     String? locality = place.locality;
-  //     String? subLocality = place.subLocality;
-  //     String? administrativeArea = place.administrativeArea;
-  //     String? postalCode = place.postalCode;
-  //     String? country = place.country;
+      Placemark place = newPlace[0];
+      String? name = place.name;
+      String? locality = place.locality;
+      String? subLocality = place.subLocality;
+      String? administrativeArea = place.administrativeArea;
+      String? postalCode = place.postalCode;
+      String? country = place.country;
 
-  //     String? address = "$name, $country, $postalCode, $locality, $subLocality, $administrativeArea";
+      String? address = "$name, $country, $postalCode, $locality, $subLocality, $administrativeArea";
+      setState(() {
+        _address = address;
+      });
+    } catch (e) {
 
-  //     _address = address;
-  //   } catch (e) {
-
-  //   }
-  // }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -118,7 +118,10 @@ class _MainAppState extends State<MainApp> {
                             return Column(
                               children: [
                                 Text("Coordinatesss"),
-                                Text("Longitude: ${state.position.longitude}, Latitude: ${state.position.latitude}")
+                                Text("Longitude: ${state.position.longitude}, Latitude: ${state.position.latitude}"),
+                                SizedBox(height: 30,),
+                                ElevatedButton(onPressed: (){_getAddressFromCoords(state.position);}, child: Text("Get Address")),
+                                Text("${_address}")
                               ],
                             );
                           }

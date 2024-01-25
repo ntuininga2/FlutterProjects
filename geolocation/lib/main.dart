@@ -132,7 +132,6 @@ class _MainAppState extends State<MainApp> {
                         },
                       ),
                     ),
-                    SizedBox(height: 30,),
                   ],
                 ),
               ),

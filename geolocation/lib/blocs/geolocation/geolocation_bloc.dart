@@ -26,6 +26,10 @@ class GeolocationBloc extends Bloc<GeolocationEvent, GeolocationState> {
               emit(GeolocationLoaded(position: event.position));
             }
           });
+
+          geolocationRepository.positionStream.listen((event) {
+            _mapLoadGeolocationToState();
+          });
         }
 
 

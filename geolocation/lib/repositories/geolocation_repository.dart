@@ -3,7 +3,17 @@ import 'package:geolocation/repositories/base_geolocation_repository.dart';
 import 'package:geolocator/geolocator.dart';
 
 class GeolocationRepository extends BaseGeolocationRepository {
-  GeolocationRepository();
+  GeolocationRepository(){
+    StreamSubscription<Position> positionStream = Geolocator.getPositionStream(locationSettings: const LocationSettings(
+    accuracy: LocationAccuracy.high,
+    distanceFilter: 5
+    )).listen(
+      (Position? position) {
+          if (position != null){
+            _positionController.add(position);
+          }
+      });
+  }
 
   //Get current location as a Future Position Object
   @override
@@ -46,13 +56,8 @@ class GeolocationRepository extends BaseGeolocationRepository {
   }
 
 
-  StreamSubscription<Position> positionStream = Geolocator.getPositionStream(locationSettings: const LocationSettings(
-    accuracy: LocationAccuracy.high,
-    distanceFilter: 100,
-    timeLimit: Duration(seconds: 5)
-  )).listen(
-    (Position? position) {
-        print(position == null ? 'Unknown' : '${position.latitude.toString()}, ${position.longitude.toString()}');
-    });
 
+    StreamController<Position> _positionController = StreamController<Position>.broadcast();
+
+    Stream<Position> get positionStream => _positionController.stream;
 }

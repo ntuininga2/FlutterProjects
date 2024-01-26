@@ -80,11 +80,11 @@ class _MainAppState extends State<MainApp> {
                           {
                             return Column(
                               children: [
-                                Text("Coordinatesss"),
+                                Text("Coordinates"),
                                 Text("Longitude: ${state.position.longitude}, Latitude: ${state.position.latitude}"),
                                 SizedBox(height: 30,),
                                 ElevatedButton(onPressed: (){_getAddressFromCoords(state.position);}, child: Text("Get Address")),
-                                Text("${_address}")
+                                Text("$_address")
                               ],
                             );
                           }
